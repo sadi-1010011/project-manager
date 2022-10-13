@@ -18,6 +18,7 @@ const progressSchema = {
 const projectSchema = {
     state: {
         type: String,
+        required: true
     },
     type: {
         type: String,
@@ -34,7 +35,7 @@ const projectSchema = {
     progress: [mongoose.SchemaTypes.ObjectId]
 }
 
+// const Progress = mongoose.model("Progress", progressSchema);
 const Project = mongoose.model("Project", projectSchema);
-const Progress = mongoose.model("Progress", progressSchema);
 
 module.exports = Project;

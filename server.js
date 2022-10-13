@@ -3,7 +3,7 @@ const app = express();
 const cors = require("cors");
 const mongoose = require("mongoose");
 
-// ENDPOINTS
+// ROUTES
 const currentRoute = require('./routes/currentRoute');
 const completeRoute = require('./routes/completeRoute');
 const comingRoute = require('./routes/comingRoute');
@@ -32,11 +32,11 @@ mongoose.connect(
   { useNewUrlParser: true,
     useUnifiedTopology: true })
 .then(() => console.log( 'DB Connected' ))
-.catch(err => console.log( 'cannot connect DB: ', err ));;
+.catch(err => console.log( 'cannot connect DB: ')); // log err for debugging
 // mongoose.connect("mongodb+srv://sadi:p7RTpegZrX7Fl4HH@cluster0.xe6l4.mongodb.net/projectsDB") try this
 
 
-// ROUTES
+// ENDPOINTS
 app.use("/", currentRoute); // homepage is current page
 app.use("/projects", projectsRoute);
 app.use("/current", currentRoute);
