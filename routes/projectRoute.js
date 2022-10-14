@@ -44,18 +44,23 @@ router.route("/:id").delete((req, res) => {
 // UPDATE A PROJECT
 router.route("/update/:id").post( async (req, res) => {
     // update by id 
-    const projectid = req.params.id;
-    const { type, name, description, date } = req.body;
-    Project.findById(projectid)
+    const projectId = req.params.id;
+    console.log('updating: ', projectId);
+    const { state, type, name, description, date } = req.body;
+    Project.findById(projectId)
         .then(project => {
+            project.state = state,
             project.type = type,
             project.name = name,
             project.description = description,
-            project.date = date
+            project.date = Date.parse(date);
             // project.progress = [...project.progress]
+
+            project.save()
+                .then(() => res.json('project updated!'))
+                .catch(err => res.status(400).json('error: ', err));
         })
         .catch(err => res.status(400).json('error updating project: ', err));
-    res.status(200).json('updated project!');
 });
 
 module.exports = router;
