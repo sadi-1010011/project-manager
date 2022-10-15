@@ -13,9 +13,9 @@ router.route("/").get( async (req, res) => {
 // CREATE NEW PROJECT
 router.route("/create").post((req, res) => {
     // get data from frontend
-    const { type, name, description, date, state } = req.body;
+    const { type, name, description, date, state, progressbar } = req.body;
     const newProject = new Project({
-        type, name, description, date, state,
+        type, name, description, date, state, progressbar,
         progress: [],
     });
     // save to DB -
@@ -46,7 +46,7 @@ router.route("/update/:id").post( async (req, res) => {
     // update by id 
     const projectId = req.params.id;
     console.log('updating: ', projectId);
-    const { state, type, name, description, date } = req.body;
+    const { state, type, name, description, date, progressbar } = req.body;
     Project.findById(projectId)
         .then(project => {
             project.state = state,
@@ -54,6 +54,7 @@ router.route("/update/:id").post( async (req, res) => {
             project.name = name,
             project.description = description,
             project.date = Date.parse(date);
+            project.progressbar = progressbar
             // project.progress = [...project.progress]
 
             project.save()
