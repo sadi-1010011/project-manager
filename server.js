@@ -20,6 +20,7 @@ app.use(express.json());
 const PORT = process.env.PORT || 5000;
 
 // CONNECT DB - username: sadi, password: p7RTpegZrX7Fl4HH
+// NOTT HIDING - because its not a patented project or a brand new Endeavor
 const username = "sadi";
 const password = "p7RTpegZrX7Fl4HH";
 const cluster = "cluster0.xe6l4";

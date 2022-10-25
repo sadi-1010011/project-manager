@@ -7,7 +7,7 @@ router.get('/', async (req, res) => {
     const foundProjects = await Project.find({
         "state" : "current"
     });
-    console.log('FETCH PROJECTS ');
+    console.log('FETCH PROJECTS - current ');
     res.json(foundProjects);
 });
 

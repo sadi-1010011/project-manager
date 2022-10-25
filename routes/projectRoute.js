@@ -20,7 +20,7 @@ router.route("/create").post((req, res) => {
     });
     // save to DB -
     newProject.save();
-    res.status(200).send('created project!');
+    res.status(200).send('project created!');
 });
 
 
@@ -46,7 +46,7 @@ router.route("/update/:id").post( async (req, res) => {
     // update by id 
     const projectId = req.params.id;
     console.log('updating: ', projectId);
-    const { state, type, name, description, date, progressbar } = req.body;
+    const { state, type, name, description, date } = req.body;
     Project.findById(projectId)
         .then(project => {
             project.state = state,
@@ -54,7 +54,7 @@ router.route("/update/:id").post( async (req, res) => {
             project.name = name,
             project.description = description,
             project.date = Date.parse(date);
-            project.progressbar = progressbar
+            project.progressbar = progressbar // to be customized ..
             // project.progress = [...project.progress]
 
             project.save()
@@ -69,10 +69,11 @@ router.route("/update/:id").post( async (req, res) => {
 router.route("/:id/updateprogress").post( async (req, res) => {
     // append progress
     const projectId = req.params.id;
-
+    // find and update
     await Project.findById(projectId)
         .then(project => {
-            project.progress = [...req.body];
+            project.progress = [...req.body.progress];
+            project.progressbar = req.body.progressbar;
             project.save()
                 .then(() => res.json('progress updated!'))
                 .catch(err => res.status(400).json(err));

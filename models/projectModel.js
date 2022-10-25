@@ -19,6 +19,9 @@ const projectSchema = {
     date: {
         type: Date
     },
+    progressbar: {
+        type: Number
+    },
     progress: [ {
         description: {
                 type: String,
