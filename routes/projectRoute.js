@@ -64,4 +64,20 @@ router.route("/update/:id").post( async (req, res) => {
         .catch(err => res.status(400).json('error updating project: ', err));
 });
 
+
+// UPDATE Any PROGRESS
+router.route("/:id/updateprogress").post( async (req, res) => {
+    // append progress
+    const projectId = req.params.id;
+
+    await Project.findById(projectId)
+        .then(project => {
+            project.progress = [...req.body];
+            project.save()
+                .then(() => res.json('progress updated!'))
+                .catch(err => res.status(400).json(err));
+    })
+    .catch(err => res.status(400).json('error updating progress: ', err));
+});
+
 module.exports = router;

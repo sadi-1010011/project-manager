@@ -1,18 +1,5 @@
-const mongoose = require("mongoose"); 
+const mongoose = require("mongoose");
 
-// model of progress data
-const progressSchema = {
-    type: {
-        type: String,
-        lowercase: true,
-        required: true
-    },
-    description: String,
-    date: {
-        type: Date,
-        default: () => Date.now()
-    }
-}
 
 // model of project data
 const projectSchema = {
@@ -32,10 +19,21 @@ const projectSchema = {
     date: {
         type: Date
     },
-    progress: [mongoose.SchemaTypes.ObjectId]
+    progress: [ {
+        description: {
+                type: String,
+                lowercase: true,
+                required: true
+            },
+                description: String,
+        date: {
+                type: Date,
+                default: () => Date.now()
+            }
+        }
+    ]
 }
 
-// const Progress = mongoose.model("Progress", progressSchema);
 const Project = mongoose.model("Project", projectSchema);
 
 module.exports = Project;
