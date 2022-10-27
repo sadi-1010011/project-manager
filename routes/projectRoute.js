@@ -59,9 +59,9 @@ router.route("/update/:id").post( async (req, res) => {
 
             project.save()
                 .then(() => res.json('project updated!'))
-                .catch(err => res.status(400).json('error: ', err));
+                .catch(err => res.status(400).send('error: ', err));
         })
-        .catch(err => res.status(400).json('error updating project: ', err));
+        .catch(err => res.status(400).send('error updating project: ', err));
 });
 
 
